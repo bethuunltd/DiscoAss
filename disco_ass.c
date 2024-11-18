@@ -4,7 +4,6 @@
 //Kahn Algorithm
 
 k_alg(){
-
 }
 
 
