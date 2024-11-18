@@ -3,8 +3,9 @@
 
 //Kahn Algorithm
 
-k_alg(){
-}
+// k_alg(){
+
+// }
 
 
 
@@ -16,6 +17,7 @@ int main(){
     int n = str_sep_v[0];
     int m = str_sep_v[1];
     int m_dep[m][2];//2D Array of size mx2
+    
     for (int i = 0; i < m; i++) {//Taking in dependencies, and storing in the mx2 matrix
     fscanf(file_ptr, "%i %i\n", &m_dep[i][0], &m_dep[i][1]);
     }
@@ -27,15 +29,43 @@ int main(){
             adj_mat[i][j]=0;
         }
     }
-
-    int key[n];//the labelling for the nxn adjacency matrix
+    //Making the matrix:
     
-    for(int i=0;i<n;i++){//dont need this at all(because i forgot the fact that numbers come after one another) still committing because want a record of how dumb i can get my god
-        key[i]= i+1;
+    for(int i=0;i<m;i++){
+        adj_mat[m_dep[i][0]-1][m_dep[i][1]-1] = 1;
+    }
+    
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            printf("%d ",adj_mat[i][j]);
+            }
+        printf("\n");
+    }
+    
+    
+    //Matrix for "removed" nodes, to ensure no duplicate outputs.
+    int removed[n];
+    for(int i=0;i<n;i++){
+        removed[i]=0;
+    }
+    
+
+    int output[n][n];
+    for(int i=0;i<n;i++){
+        for(int j;j<n;j++){
+            output[i][j]=0;
+            }
+        
     }
 
 
+
+    
     //Calling Kahn Algorithm for each step
+    //Finding the first root
+    // for(int j=0;j<n;j++){
+
+    // }
 
     
 
