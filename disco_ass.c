@@ -57,7 +57,12 @@ int cont_flag(int removed_arr[]){
 
 //Kahn's algorithm 
     //while the removed array isnt completely empty(meaning all indices =1), the algorithm keeps running
+int to_remove_arr[n];//the array of nodes to be removed in a specific round
+
 while (cont_flag(removed_arr)){
+    for(int i=0;i<n;i++){//before every loop, this array is cleared to zero; as it only applies to this round
+        to_remove_arr[i]=0;
+    }
     for(int j=0;j<n;j++){
         if (removed_arr[j] == 1){
             int ptr = 0;//if it gets through all rows and ptr=0, then it is a root
@@ -67,11 +72,8 @@ while (cont_flag(removed_arr)){
                 } 
             }
            if(ptr==0){//if it is a root, then remove corresponding dependencies, and set removed=0
-            printf("%d ",j+1);
-            removed_arr[j] = 0;
-            for(int ni=0;ni<n;ni++){
-                adj_mat[j][ni]=0;
-            }
+                to_remove_arr[j]=1;
+
         }
             
         }
@@ -79,7 +81,19 @@ while (cont_flag(removed_arr)){
         //checking if removed is true for the column, then dont take into consideration
 
     }
+    for(int i=0;i<n;i++){
+        if(to_remove_arr[i]==1){
+            printf("%d ",i+1);
+            removed_arr[i] = 0;
+            for(int ni=0;ni<n;ni++){//removing all dependencies for the corresponding row
+                adj_mat[i][ni]=0;
+
+            }
+        
+        }
+    }
     printf("\n");
+    
 }
 
 
