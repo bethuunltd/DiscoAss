@@ -3,12 +3,6 @@
 
 //Kahn Algorithm
 
-// k_alg(){
-
-// }
-
-
-
 int main(){
     FILE *file_ptr;
     file_ptr = fopen("a.txt", "r");
@@ -29,7 +23,7 @@ int main(){
             adj_mat[i][j]=0;
         }
     }
-    //Making the matrix:
+    //Making the matrix; Remember that numbers represented = matrix index +1 (eg: 1 is index 0)
     
     for(int i=0;i<m;i++){
         adj_mat[m_dep[i][0]-1][m_dep[i][1]-1] = 1;
@@ -44,19 +38,49 @@ int main(){
     
     
     //Matrix for "removed" nodes, to ensure no duplicate outputs.
-    int removed[n];
+    int removed_arr[n];//in the array, removed numbers are represented with 0 and the existing ones with 1
     for(int i=0;i<n;i++){
-        removed[i]=0;
+        removed_arr[i]=1;
     }
     
 
-    int output[n][n];
+//Making a flag function to decide when to stop Kahn's algorithm
+int cont_flag(int removed_arr[]){
+    int cont =0;
     for(int i=0;i<n;i++){
-        for(int j;j<n;j++){
-            output[i][j]=0;
-            }
-        
+        if (removed_arr[i]==1){
+            cont = 1;
+        }
     }
+    return cont; 
+}
+
+//Kahn's algorithm 
+    //while the removed array isnt completely empty(meaning all indices =1), the algorithm keeps running
+while (cont_flag(removed_arr)){
+    for(int j=0;j<n;j++){
+        if (removed_arr[j] == 1){
+            int ptr = 0;//if it gets through all rows and ptr=0, then it is a root
+            for(int i=0;i<n;i++){
+                if(adj_mat[i][j]==1){
+                    ptr=1;
+                } 
+            }
+           if(ptr==0){//if it is a root, then remove corresponding dependencies, and set removed=0
+            printf("%d ",j+1);
+            removed_arr[j] = 0;
+            for(int ni=0;ni<n;ni++){
+                adj_mat[j][ni]=0;
+            }
+        }
+            
+        }
+        // flag = false
+        //checking if removed is true for the column, then dont take into consideration
+
+    }
+    printf("\n");
+}
 
 
 
